@@ -21,6 +21,28 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
+// collections start
+
+const addedTasksCollection = client.db("todoAppDBUser").collection("tasks");
+
+// collections end
+
+const run = async () => {
+  try {
+    // store the tasks API start
+    app.post("/addTask", async (req, res) => {
+      const taskData = req.body;
+      const result = await addedTasksCollection.insertOne(taskData);
+      res.send(result);
+    });
+    // store the tasks API end
+  } finally {
+    console.log();
+  }
+};
+
+run().catch((e) => console.log(e));
+
 // default page API start
 app.get("/", (req, res) => {
   res.send("Hellwet Soft Task Server");
