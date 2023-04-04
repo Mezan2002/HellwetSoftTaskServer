@@ -12,6 +12,15 @@ app.use(cors());
 app.use(express.json());
 // middlewears end
 
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.2ahck7i.mongodb.net/?retryWrites=true&w=majority`;
+
+console.log(uri);
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
+
 // default page API start
 app.get("/", (req, res) => {
   res.send("Hellwet Soft Task Server");
@@ -23,3 +32,6 @@ app.listen(port, () => {
   console.log(`Hellwet Soft Task Server is Running on ${port}`);
 });
 // listen the server API end
+
+// todoAppDBUser
+// cHA0AcDuexwvyQD6
