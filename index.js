@@ -14,7 +14,6 @@ app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.2ahck7i.mongodb.net/?retryWrites=true&w=majority`;
 
-console.log(uri);
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -36,6 +35,16 @@ const run = async () => {
       res.send(result);
     });
     // store the tasks API end
+
+    // get tasks of an user API start
+    app.get("/tasks", async (req, res) => {
+      const userEmail = req.query;
+      const query = { userEmail: userEmail.userEmail };
+      const result = await addedTasksCollection.find(query).toArray();
+      console.log(result);
+      res.send(result);
+    });
+    // get tasks of an user API end
   } finally {
     console.log();
   }
