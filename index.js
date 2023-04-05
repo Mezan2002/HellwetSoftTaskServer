@@ -41,10 +41,18 @@ const run = async () => {
       const userEmail = req.query;
       const query = { userEmail: userEmail.userEmail };
       const result = await addedTasksCollection.find(query).toArray();
-      console.log(result);
       res.send(result);
     });
     // get tasks of an user API end
+
+    // delete task API start
+    app.delete("/task/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await addedTasksCollection.deleteOne(query);
+      res.send(result);
+    });
+    // delete task API end
   } finally {
     console.log();
   }
