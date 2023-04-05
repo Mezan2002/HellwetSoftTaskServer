@@ -53,6 +53,23 @@ const run = async () => {
       res.send(result);
     });
     // delete task API end
+
+    // update the task data start
+    app.patch("/updatedTask/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedTaskData = req.body;
+      const filter = { _id: new ObjectId(id) };
+      const updatedData = {
+        $set: {
+          title: updatedTaskData.updatedTitle,
+          description: updatedTaskData.updatedDescription,
+          date: updatedTaskData.updatedDate,
+        },
+      };
+      const result = await addedTasksCollection.updateOne(filter, updatedData);
+      res.send(result);
+    });
+    // update the task data end
   } finally {
     console.log();
   }
