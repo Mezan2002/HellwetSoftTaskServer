@@ -91,6 +91,3 @@ app.listen(port, () => {
   console.log(`Hellwet Soft Task Server is Running on ${port}`);
 });
 // listen the server API end
-
-// todoAppDBUser
-// cHA0AcDuexwvyQD6
