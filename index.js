@@ -40,7 +40,10 @@ const run = async () => {
     app.get("/tasks", async (req, res) => {
       const userEmail = req.query;
       const query = { userEmail: userEmail.userEmail };
-      const result = await addedTasksCollection.find(query).toArray();
+      const options = {
+        sort: { createdAt: -1 },
+      };
+      const result = await addedTasksCollection.find(query, options).toArray();
       res.send(result);
     });
     // get tasks of an user API end
